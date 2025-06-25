@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Diesel Plant Simulation</title>
   <style>
-    body {
-  font-family: Arial, sans-serif;
-  background-image: url('../source/BackgroundMap.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
-  font-size: 24px; /* 16px * 1.5 = 24px */
-  font-weight: bold;
-}
-
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('../source/Background.jpeg');
+      background-size: 100;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
     header {
       background-color: #003366;
@@ -25,7 +27,6 @@
       text-align: center;
     }
 
-    /* Exclude headings from increased font size and bold */
     h1, h2, h3, h4, h5, h6 {
       font-size: revert;
       font-weight: revert;
@@ -33,17 +34,23 @@
 
     .container {
       position: relative;
-      width: 1920px;
-      height: 1080px;
+      width: 100%;
+      height: 100%;
       margin: 0 auto;
       padding: 20px;
       overflow: hidden;
+      transform-origin: top left;
+      transform: scale(1);
+    }
+
+    @media (max-width: 100%) {
+      .container {
+        transform: scale(calc(100vw / 1920));
+      }
     }
 
     .card {
       position: absolute;
-      width: 160px;
-      height: 160px;
       background-color: white;
       border-radius: 50%;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -54,42 +61,7 @@
       cursor: pointer;
       z-index: 2;
       transition: box-shadow 0.5s ease;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .card h3 {
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      z-index: 9999;
-      font-weight: bold;
-    }
-
-    .container {
-      position: relative;
-      width: 1920px;
-      height: 1080px;
-      margin: 0 auto;
-      padding: 20px;
-      overflow: hidden;
-    }
-
-    .card {
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      background-color: white;
-      border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      cursor: pointer;
-      z-index: 2;
-      transition: box-shadow 0.5s ease;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
     }
 
@@ -97,137 +69,6 @@
     .card.glow-red { box-shadow: 0 0 20px 5px #ff0000; }
     .card.glow-blue { box-shadow: 0 0 20px 5px #00ccff; }
     .card.glow-yellow { box-shadow: 0 0 20px 5px #ffff00; }
-
-    .card h3 {
-      margin: 0;
-      padding: 0;
-      font-size: 16px;
-      z-index: 9999;
-      font-weight: bold;
-    }
-
-    #local-demand {
-  top: 500px;
-  left: 1750px;
-  width: 160px;
-  height: 160px;
-}
-
-#inland-demand {
-  top: 700px;
-  left: 1200px;
-  width: 160px;
-  height: 160px;
-}
-
-#local-demand + .card-label {
-  top: 670px;
-  left: 1750px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-#inland-demand + .card-label {
-  top: 870px;
-  left: 1200px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-}
-
-.spinner-container {
-      position: absolute;
-      font-size: 21px; /* 14px * 1.5 */
-      font-weight: bold;
-    }
-
-    input[type="text"] {
-      width: 160px;
-      height: 30px;
-      font-size: 21px; /* 14px * 1.5 */
-      text-align: center;
-      margin-right: 5px;
-      font-weight: bold;
-    }
-
-    .buttons {
-      display: inline-block;
-      vertical-align: top;
-    }
-
-    .buttons button {
-      height: 24px; /* 16px * 1.5 */
-      width: 30px; /* 20px * 1.5 */
-      display: block;
-      padding: 0;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .pipe {
-      position: absolute;
-      height: 15px;
-      background: repeating-linear-gradient(
-        90deg,
-        #007bff,
-        #007bff 10px,
-        #00c6ff 10px,
-        #00c6ff 20px
-      );
-      background-size: 40px 6px;
-      animation: flow 1.2s linear infinite;
-      border-radius: 4px;
-      z-index: 1;
-    }
-
-    @keyframes flow {
-      0% { background-position: 0 0; }
-      100% { background-position: 40px 0; }
-    }
-
-    .flow-label {
-      position: absolute;
-      background-color: #fff;
-      padding: 3px 8px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 18px; /* 12px * 1.5 */
-      white-space: nowrap;
-      z-index: 3;
-      font-weight: bold;
-    }
-
-    .percentage-overlay {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 8px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      font-size: 21px; /* 14px * 1.5 */
-      border-radius: 4px;
-      z-index: 2;
-      pointer-events: none;
-      font-weight: bold;
-    }
-
-    /* Cards */
-    #refinery         { top: 20px; left: 20px; width: 300px; height: 300px ; }
-    #terminal         { top: 200px; left: 700px; width: 300px; height: 300px; }
-    #local-storage  { top: 100px; left: 1500px; width: 200px; height: 200px ;}
-    #inland-storage   { top: 700px; left: 700px; width: 250px; height: 250px ;}
-    
-    #status           {
-      top: 1000px;
-      left: center;
-      border-radius: 20px;
-      width: 1800px;
-      height: auto;
-      padding: 20px;
-    }
 
     .card img {
       width: 70%;
@@ -239,80 +80,94 @@
       margin: 0 auto;
     }
 
-    /* Pipes */
-    #pipe1 {
-      top: 250px; left: 230px;
-      width: 500px;
-      transform: rotate(25deg);
-      
-      
+    .percentage-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 18px;
+      border-radius: 4px;
+      z-index: 2;
+      pointer-events: none;
     }
-
-    #pipe2 {
-      top: 300px; left: 820px;
-      width: 700px;
-      transform: rotate(-15deg);
-    }
-
-    #pipe3 {
-      top: 450px;
-      left: 820px;
-      width: 15px;
-      height: 270px;
-      transform: rotate(0deg);
-    }
-
-    #pipe4 {
-  top: 240px;
-  left: 1700px;
-  width: 15px;
-  height: 300px;
-  transform: rotate(-30deg);
-}
-
-#pipe5 {
-  top: 800px;
-  left: 900px;
-  width: 310px;
-  height: 15px;
-  transform: rotate(-10deg);
-}
-    .pipe {
-  animation-duration: var(--flow-speed, 1.2s);
-}
-
-
-
-    /* Flow labels */
-    #label1 { top: 200px; left: 500px; }
-    #label2 { top: 210px; left: 1200px; }
-    #label3 { top: 600px; left: 810px; }
-    #label4 {top: 410px; left: 1670px; }
-    #label5 {top: 770px; left: 1010px; }
-
-
 
     .card-label {
       position: absolute;
       width: 160px;
       text-align: center;
-      left: 0;
-      font-size: 24px;
-      margin: 0;
-      padding: 0;
-      pointer-events: none;
-      font-weight: bold;
+      font-size: 18px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border-radius: 4px;
+      padding: 4px 8px;
     }
-    #refinery + .card-label { top: 350px; left: 80px; padding: 4px 8px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 4px; }
-    #terminal + .card-label { top: 150px; left: 750px; width: 200px; padding: 4px 8px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 4px; }
-    #local-storage + .card-label { top: 60px; left: 1500px; z-index: 11; padding: 4px 8px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 4px; }
-    #inland-storage + .card-label { top: 960px; left: 730px; padding: 4px 8px; background: rgba(0, 0, 0, 0.7);color: white; border-radius: 4px; }
 
-    
+    #refinery { top: 600px; left: 470px; width: 130px; height: 130px; }
+    #terminal { top:550px; left: 830px; width: 140px; height: 140px; }
+    #local-storage { top: 335px; left: 1150px; width: 100px; height: 100px; }
+    #inland-storage { top: 100px; left: 950px; width: 100px; height: 100px; }
+    #local-demand { top: 250px; left: 1250px; width: 70px; height: 70px; }
+    #inland-demand { top: 200px; left: 850px; width: 70px; height: 70px; }
+    #status {
+      top: 2400px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      width: 1800px;
+      height: auto;
+      padding: 20px;
+    }
+
+    #refinery + .card-label { top: 570px; left: 450px; }
+    #terminal + .card-label { top: 550px; left: 770px; width: 110px; transform: rotate(-40deg); }
+    #local-storage + .card-label { top: 335px; left: 1050px; transform: rotate(-50deg); }
+    #inland-storage + .card-label { top: 960px; left: 730px; }
+    #local-demand + .card-label { top: 670px; left: 1750px; }
+    #inland-demand + .card-label { top: 870px; left: 1200px; }
+
+    .pipe {
+      position: absolute;
+      height: 15px;
+      background: repeating-linear-gradient(90deg, #007bff, #007bff 10px, #00c6ff 10px, #00c6ff 30px);
+      background-size: 40px 6px;
+      animation: flow var(--flow-speed, 1.2s) linear infinite;
+      border-radius: 4px;
+      z-index: 1;
+    }
+
+    @keyframes flow {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 0; }
+    }
+
+    #pipe1 { top: 650px; left: 500px; width: 350px; transform: rotate(-10deg); }
+    #pipe2 { top: 400px; left: 740px; width: 430px; transform: rotate(100deg); }
+    #pipe3 { top: 180px; left: 900px; width: 100px; transform: rotate(140deg); }
+    #pipe4 { top: 300px; left: 1200px; width: 100px; transform: rotate(130deg); }
+    #pipe5 { top: 500px; left: 900px; width: 310px; height: 15px; transform: rotate(-40deg); }
+
+    .flow-label {
+      position: absolute;
+      background-color: #7bb0ec;
+      padding: 3px 8px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 18px;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    #label1 { top: 675px; left: 630px; transform: rotate(-20); }
+    #label2 { top: 300px; left: 900px; }
+    #label3 { top: 900px; left: 810px; }
+    #label4 { top: 410px; left: 1670px; }
+    #label5 { top: 550px; left: 1010px; }
   </style>
 </head>
 <body>
-  <header>
+<header>
     <h1>🚛 Diesel Plant Simulation</h1>
   </header>
 
@@ -543,5 +398,6 @@ setFlowSpeed("pipe4", "label4", 80);
 setFlowSpeed("pipe5", "label5", 65);
 
   </script>
+
 </body>
 </html>
