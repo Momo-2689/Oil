@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tank Liquid Fill</title>
+  <style>
+    body {
+      margin: 0;
+      background: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .tank-container {
+      position: relative;
+      width: 300px;
+      height: 500px;
+    }
+
+    .tank-img {
+      position: absolute;
+      top:-360px;
+      left:-105px;
+      width: 500px;
+      height:1025px;
+      /z-index: 3;/
+     /* object-fit: contain;*/
+      pointer-events: none;
+      opacity:20 /* Slight transparency to show liquid inside clearly */
+    }
+
+    .liquid {
+  position: absolute;
+  bottom: 0;
+  width: 385px;
+  height: 50px;
+  left: -48px;
+  background: #0099ff;
+  z-index: 1;
+  transition: height 1s ease-in-out;
+  overflow: hidden;
+  border-radius: 0 0 150px 150px / 0 0 80px 80px;
+  opacity: 0.6;
+}
+
+/* Pseudo-element for concave top */
+.liquid::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: #bab9b9; /* match your page's background color */
+  border-radius: -0 -0 500px 500px/ 0 0 320px 320px;
+  z-index: 2;
+  opacity: 10
+  
+}
+
+    .wave {
+      position: absolute;
+      top: -10px;
+      width: 385px;
+      height: 40px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 30 0 60 10 T 120 10 V20 H0 Z" fill="%23ffffff"/></svg>') repeat-x;
+      background-size: 120px 100%;
+      animation: waveFlow 4s linear infinite;
+      opacity: 0.3;
+      z-index: 2;
+      border-radius:0 0 500px 500px/ 0 0 300px 300px;
+      
+    
+    }
+         
+    .wave.wave2 {
+      animation-duration: 6s;
+      opacity: 0.2;
+      top: -5px;
+    }
+
+    @keyframes waveFlow {
+      0% {
+        background-position-x: 0;
+      }
+      100% {
+        background-position-x: -120px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tank-container">
+    <!-- Liquid -->
+    <div class="liquid" id="liquid">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+    </div>
+
+    <!-- Tank image with transparent inside and visible tank walls -->
+    <img src="tt.webp" alt="Tank" class="tank-img" />
+  
+  </div>
+
+  <script>
+    const liquid = document.getElementById('liquid');
+    let percentage = 20;
+
+    function increaseLiquid() {
+      if (percentage > 100) return;
+      liquid.style.height = percentage + '%';
+      percentage += 20;
+      setTimeout(increaseLiquid, 2000);
+    }
+
+    window.onload = increaseLiquid;
+  </script>
+</body>
+</html>
