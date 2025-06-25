@@ -13,6 +13,8 @@
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
+  font-size: 24px; /* 16px * 1.5 = 24px */
+  font-weight: bold;
 }
 
 
@@ -21,6 +23,12 @@
       color: white;
       padding: 20px;
       text-align: center;
+    }
+
+    /* Exclude headings from increased font size and bold */
+    h1, h2, h3, h4, h5, h6 {
+      font-size: revert;
+      font-weight: revert;
     }
 
     .container {
@@ -46,6 +54,43 @@
       cursor: pointer;
       z-index: 2;
       transition: box-shadow 0.5s ease;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .card h3 {
+      margin: 0;
+      padding: 0;
+      font-size: 16px;
+      z-index: 9999;
+      font-weight: bold;
+    }
+
+    .container {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .card {
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: box-shadow 0.5s ease;
+      font-size: 24px;
+      font-weight: bold;
     }
 
     .card.glow-green { box-shadow: 0 0 20px 5px #00ff00; }
@@ -58,6 +103,7 @@
       padding: 0;
       font-size: 16px;
       z-index: 9999;
+      font-weight: bold;
     }
 
     #local-demand {
@@ -94,15 +140,17 @@
 
 .spinner-container {
       position: absolute;
-      font-size: 14px;
+      font-size: 21px; /* 14px * 1.5 */
+      font-weight: bold;
     }
 
     input[type="text"] {
       width: 160px;
       height: 30px;
-      font-size: 14px;
+      font-size: 21px; /* 14px * 1.5 */
       text-align: center;
       margin-right: 5px;
+      font-weight: bold;
     }
 
     .buttons {
@@ -111,19 +159,13 @@
     }
 
     .buttons button {
-      height: 16px;
-      width: 20px;
+      height: 24px; /* 16px * 1.5 */
+      width: 30px; /* 20px * 1.5 */
       display: block;
       padding: 0;
+      font-size: 24px;
+      font-weight: bold;
     }
-
-    /* Positioning each spinner */
-    #spinner1 { top: 400px; left: 50px; }
-    #spinner2 { top: 60px; left: 760px; }
-    #spinner3 { top: 190px; left: 50px; }
-    #spinner4 { top: 50px; left: 300px; }
-    #spinner5 { top: 120px; left: 300px; }
-    #spinner6 { top: 190px; left: 300px; }
 
     .pipe {
       position: absolute;
@@ -152,9 +194,24 @@
       padding: 3px 8px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 18px; /* 12px * 1.5 */
       white-space: nowrap;
       z-index: 3;
+      font-weight: bold;
+    }
+
+    .percentage-overlay {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-size: 21px; /* 14px * 1.5 */
+      border-radius: 4px;
+      z-index: 2;
+      pointer-events: none;
+      font-weight: bold;
     }
 
     /* Cards */
@@ -180,19 +237,6 @@
       z-index: 1;
       display: block;
       margin: 0 auto;
-    }
-
-    .percentage-overlay {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 8px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      font-size: 14px;
-      border-radius: 4px;
-      z-index: 2;
-      pointer-events: none;
     }
 
     /* Pipes */
@@ -253,10 +297,11 @@
       width: 160px;
       text-align: center;
       left: 0;
-      font-size: 16px;
+      font-size: 24px;
       margin: 0;
       padding: 0;
       pointer-events: none;
+      font-weight: bold;
     }
     #refinery + .card-label { top: 350px; left: 80px; padding: 4px 8px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 4px; }
     #terminal + .card-label { top: 150px; left: 750px; width: 200px; padding: 4px 8px; background: rgba(0, 0, 0, 0.7); color: white; border-radius: 4px; }
