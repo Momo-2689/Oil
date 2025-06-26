@@ -183,81 +183,85 @@
     } */
 
     /* Tank image layer */
-    .tank-img {
-      position: absolute;
-      top:-360px;
-      left:-105px;
-      width: 500px;
-      height:1025px;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0.8;
-    }
+.tank-container {
+    width: 140px;
+    height: 140px;
+    margin: 50px auto;
+    position: absolute;
+    pointer-events: none;
+}
 
-    /* Liquid animation layer */
-    .liquid-container {
-      position: absolute;
-      bottom: 0;
-      width: 385px;
-      height: 50%;
-      left: -48px;
-      z-index: 3;
-    }
+.tank-img {
+    top: -72px;
+    left: -52px;
+    width: 250px;
+    height: 510px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+}
 
-    .liquid {
-      position: absolute;
-      bottom: 0;
-      width: 385px;
-      height: 50%;
-      left: -48px;
-      background: #0099ff;
-      transition: height 1s ease-in-out;
-      overflow: hidden;
-      border-radius: 0 0 150px 150px / 0 0 80px 80px;
-      opacity: 0.6;
-    }
+.liquid-container {
+    width: 90px;
+    height: 90%;  /* Changed from 70% */
+    left: 20px;
+    z-index: 3;
+    overflow: hidden;
+}
 
-    /* Pseudo-element for concave top */
-    .liquid::before {
-      content: "";
-      position: absolute;
-      top: -20px;
-      left: 0;
-      width: 100%;
-      height: 100px;
-      background: #bab9b9;
-      border-radius: -0 -0 500px 500px/ 0 0 320px 320px;
-      z-index: 2;
-      opacity: 1;
-    }
+.liquid {
+    position: absolute;
+    bottom: 0;
+    width: 90px;
+    height: 0;  /* Start with 0 height */
+    left: 20px;
+    background: #0099ff;
+    transition: height 1s ease-in-out;
+    border-radius: 0 0 60px 60px / 0 0 32px 32px;
+    opacity: 0.6;
+    z-index: 3;
+}
 
-    .wave {
-      position: absolute;
-      top: -10px;
-      width: 385px;
-      height: 40px;
-      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 30 0 60 10 T 120 10 V20 H0 Z" fill="%23ffffff"/></svg>') repeat-x;
-      background-size: 120px 100%;
-      animation: waveFlow 4s linear infinite;
-      opacity: 0.3;
-      z-index: 2;
-      border-radius:0 0 500px 500px/ 0 0 300px 300px;
-    }
-        
-    .wave.wave2 {
-      animation-duration: 6s;
-      opacity: 0.2;
-      top: -5px;
-    }
+.liquid::before {
+    content: "";
+    position: absolute;
+    bottom: 0;  /* Changed from top */
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: #bab9b9;
+    border-radius: 0 0 300px 300px/ 0 0 128px 128px;
+    z-index: 2;
+    opacity: 1;
+}
 
-    @keyframes waveFlow {
-      0% {
+.wave {
+    position: absolute;
+    bottom: 0;  /* Changed from top */
+    width: 120px;
+    height: 16px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 30 0 60 10 T 120 10 V20 H0 Z" fill="%23ffffff"/></svg>') repeat-x;
+    background-size: 48px 100%;
+    animation: waveFlow 4s linear infinite;
+    opacity: 0.3;
+    z-index: 2;
+    border-radius: 0 0 300px 300px/ 0 0 128px 128px;
+}
+
+.wave.wave2 {
+    animation-duration: 6s;
+    opacity: 0.2;
+    bottom: 2px;  /* Changed from top */
+}
+
+@keyframes waveFlow {
+    0% {
         background-position-x: 0;
-      }
-      100% {
-        background-position-x: -120px;
-      }
     }
+    100% {
+        background-position-x: -48px;  /* Adjusted for thinner width */
+    }
+}
   </style>
 </head>
 <body>
@@ -269,9 +273,27 @@
     <!-- Plant Cards -->
     <div class="card" id="refinery"><img src ="..\source\RefinerySimple.jpg" alt = "RefinerySimple Image"></div>
     <div class="card-label">Refinery</div>
-    <div class="card" id="terminal" onclick="openModal('Terminal')"><img src ="..\source\OilTankSimple.jpg" alt = "Oil Tank Image Image"><span class="percentage-overlay">75%</span></div>
+    <div class="card" id="terminal" onclick="openModal('Terminal')"><div class="tank-container">
+    <div class="liquid-container">
+        <div class="liquid" id="liquid">
+            <div class="wave wave1"></div>
+            <div class="wave wave2"></div>
+        </div>
+    </div>
+    <img src="tt.webp" alt="Tank" class="tank-img">
+</div><img src ="..\source\OilTankSimple.jpg" alt = "Oil Tank Image Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Terminal</div>
-    <div class="card" id="local-storage" onclick="openModal('Local Storage')"><img src ="..\source\OilTankSimple.jpg" alt = "Oil Barrel Image"><span class="percentage-overlay">75%</span></div>
+    <div class="card" id="local-storage" onclick="openModal('Local Storage')">
+      <div class="tank-container">
+    <div class="liquid-container">
+      <div class="liquid" id="liquid">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+      </div>
+    </div>
+    <img src="tt.webp" alt="Tank" class="tank-img">
+    </div>
+    <img src ="..\source\OilTankSimple.jpg" alt = "Oil Barrel Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Local Storage</div>
     <div class="card" id="inland-storage" onclick="openModal('Inland Storage')"><img src ="..\source\OilTankSimple.jpg" alt = "Oil Barrel Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Inland Storage</div>
@@ -490,6 +512,18 @@ setFlowSpeed("pipe2", "label2", 50);
 setFlowSpeed("pipe3", "label3", 70);
 setFlowSpeed("pipe4", "label4", 80); 
 setFlowSpeed("pipe5", "label5", 65);
+
+  const liquid = document.getElementById('liquid');
+let percentage = 20;
+
+function increaseLiquid() {
+    if (percentage > 100) return;
+    liquid.style.height = percentage + '%';
+    percentage += 20;
+    setTimeout(increaseLiquid, 2000);
+}
+
+window.onload = increaseLiquid;
 
   </script>
 
