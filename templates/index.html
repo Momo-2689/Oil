@@ -283,9 +283,32 @@
     <img src="tt.webp" alt="Tank" class="tank-img">
 </div><img src ="..\source\OilTankSimple.jpg" alt = "Oil Tank Image Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Terminal</div>
-    <div class="card" id="local-storage" onclick="openModal('Local Storage')"><img src ="..\source\OilTankSimple.jpg" alt = "Oil Barrel Image"><span class="percentage-overlay">75%</span></div>
-    <div class="card-label">Local Storage</div>
-    <div class="card" id="inland-storage" onclick="openModal('Inland Storage')"><img src ="..\source\OilTankSimple.jpg" alt = "Oil Barrel Image"><span class="percentage-overlay">75%</span></div>
+    <div class="card" id="local-storage" onclick="openModal('Local Storage')">
+        <div class="tank-container">
+            <div class="liquid-container">
+                <div class="liquid">
+                    <div class="wave wave1"></div>
+                    <div class="wave wave2"></div>
+                </div>
+            </div>
+            <img src="ls.webp" alt="Tank" class="tank-img">
+        </div>
+        <img src="..\source\OilTankSimple.jpg" alt="Oil Barrel Image">
+        <span class="percentage-overlay">75%</span>
+    </div>
+    <div class="card" id="inland-storage" onclick="openModal('Inland Storage')">
+        <div class="tank-container">
+            <div class="liquid-container">
+                <div class="liquid">
+                    <div class="wave wave1"></div>
+                    <div class="wave wave2"></div>
+                </div>
+            </div>
+            <img src="is.webp" alt="Tank" class="tank-img">
+        </div>
+        <img src="..\source\OilTankSimple.jpg" alt="Oil Barrel Image">
+        <span class="percentage-overlay">65%</span>
+    </div>
     <div class="card-label">Inland Storage</div>
     <div class="card" id="status"><h3>Status</h3><p>Monitoring...</p></div>
     <div class="card" id="local-demand" onclick="openModal('Local Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Local Demand Image"><span class="percentage-overlay">80%</span></div>
@@ -506,15 +529,60 @@ setFlowSpeed("pipe5", "label5", 65);
   const liquid = document.getElementById('liquid');
 let percentage = 20;
 
-function increaseLiquid() {
-    if (percentage > 100) return;
-    liquid.style.height = percentage + '%';
-    percentage += 20;
-    setTimeout(increaseLiquid, 2000);
+// Create a class to manage individual tank animations
+class TankAnimation {
+    constructor(tankElement) {
+        this.tank = tankElement;
+        this.percentage = 0;
+        this.isRunning = false;
+        
+        // Find the liquid element within the tank
+        this.liquidElement = this.tank.querySelector('.liquid');
+        if (!this.liquidElement) {
+            console.warn(`No liquid element found in tank: ${tankElement.id}`);
+            return;
+        }
+    }
+
+    // Start the animation loop
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.increaseLiquid();
+    }
+
+    // Stop the animation loop
+    stop() {
+        this.isRunning = false;
+    }
+
+    // Main animation function
+    increaseLiquid() {
+        if (!this.isRunning || this.percentage >= 100) {
+            this.percentage = 0; // Reset for continuous looping
+            return;
+        }
+
+        // Update liquid height
+        this.liquidElement.style.height = `${this.percentage}%`;
+        
+        // Increase percentage and schedule next update
+        this.percentage += 20;
+        setTimeout(() => this.increaseLiquid(), 2000);
+    }
 }
 
-window.onload = increaseLiquid;
-
+// Initialize all tanks when the page loads
+window.onload = () => {
+    // Get all tank containers
+    const tanks = document.querySelectorAll('.tank-container');
+    
+    // Create and start animation for each tank
+    tanks.forEach(tank => {
+        const animation = new TankAnimation(tank);
+        animation.start();
+    });
+};
   </script>
 
 </body>
