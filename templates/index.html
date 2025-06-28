@@ -13,6 +13,7 @@
       padding: 0;
       font-family: Arial, sans-serif;
       background-image: url('../source/Map2 .png');
+      background-color: #302e2e;
       background-size: 100;
       background-position: center;
       background-repeat: no-repeat;
@@ -31,6 +32,8 @@
       font-size: revert;
       font-weight: revert;
     }
+
+    
 
     .container {
       position: relative;
@@ -104,11 +107,11 @@
       padding: 4px 8px;
     }
 
-    #refinery { top: 600px; left: 470px; width: 130px; height: 130px; }
-    #terminal { top:550px; left: 830px; width: 140px; height: 140px; }
-    #local-storage { top: 335px; left: 1150px; width: 100px; height: 100px; }
-    #inland-storage { top: 100px; left: 950px; width: 100px; height: 100px; }
-    #local-demand { top: 250px; left: 1250px; width: 70px; height: 70px; }
+    #refinery { top: 500px; left: 450px; width: 130px; height: 130px; }
+    #terminal { top:480px; left: 980px; width: 140px; height: 140px; }
+    #local-storage { top: 300px; left: 1300px; width: 100px; height: 100px; }
+    #inland-storage { top: 70px; left: 1050px; width: 100px; height: 100px; }
+    #local-demand { top: 150px; left: 1350px; width: 70px; height: 70px; }
     #inland-demand { top: 200px; left: 850px; width: 70px; height: 70px; }
     #status {
       top: 2400px;
@@ -120,12 +123,12 @@
       padding: 20px;
     }
 
-    #refinery + .card-label { top: 570px; left: 450px; }
-    #terminal + .card-label { top: 550px; left: 770px; width: 110px; transform: rotate(-40deg); }
-    #local-storage + .card-label { top: 335px; left: 1050px; transform: rotate(-50deg); }
-    #inland-storage + .card-label { top: 960px; left: 730px; }
-    #local-demand + .card-label { top: 670px; left: 1750px; }
-    #inland-demand + .card-label { top: 870px; left: 1200px; }
+    #refinery + .card-label { top: 470px; left: 420px; }
+    #terminal + .card-label { top: 620px; left: 990px; width: 110px;  }
+    #local-storage + .card-label { top: 630px; left: 990px;  }
+    #inland-storage + .card-label { top: 35px; left: 1020px; }
+    #local-demand + .card-label { top: 115px; left: 1300px; }
+    #inland-demand + .card-label { top: 280px; left: 800px; }
 
     .pipe {
       position: absolute;
@@ -142,11 +145,11 @@
       100% { background-position: 40px 0; }
     }
 
-    #pipe1 { top: 650px; left: 500px; width: 350px; transform: rotate(-10deg); }
-    #pipe2 { top: 400px; left: 740px; width: 430px; transform: rotate(100deg); }
-    #pipe3 { top: 180px; left: 900px; width: 100px; transform: rotate(140deg); }
-    #pipe4 { top: 300px; left: 1200px; width: 100px; transform: rotate(130deg); }
-    #pipe5 { top: 500px; left: 900px; width: 310px; height: 15px; transform: rotate(-40deg); }
+    #pipe1 { top: 550px; left: 520px; width: 480px; transform: rotate(-5deg); }
+    #pipe2 { top: 380px; left: 860px; width: 445px; transform: rotate(275deg); }
+    #pipe3 { top: 180px; left: 900px; width: 200px; transform: rotate(160deg); }
+    #pipe4 { top: 270px; left: 1300px; width: 150px; transform: rotate(100deg); }
+    #pipe5 { top: 475px; left: 1000px; width: 345px; height: 15px; transform: rotate(-35deg); }
 
     .flow-label {
       position: absolute;
@@ -159,11 +162,11 @@
       z-index: 3;
     }
 
-    #label1 { top: 675px; left: 630px; transform: rotate(-20); }
-    #label2 { top: 300px; left: 900px; }
-    #label3 { top: 900px; left: 810px; }
-    #label4 { top: 410px; left: 1670px; }
-    #label5 { top: 550px; left: 1010px; }
+    #label1 { top: 570px; left: 680px;  }
+    #label2 { top: 300px; left: 1000px; }
+    #label3 { top: 125px; left: 890px; }
+    #label4 { top: 260px; left: 1295px; }
+    #label5 { top: 435px; left: 1160px; }
 
     .tank-container {
       position: relative;
@@ -273,6 +276,7 @@
     <!-- Plant Cards -->
     <div class="card" id="refinery"><img src ="..\source\RefinerySimple.jpg" alt = "RefinerySimple Image"></div>
     <div class="card-label">Refinery</div>
+    
     <div class="card" id="terminal" onclick="openModal('Terminal')"><div class="tank-container">
     <div class="liquid-container">
         <div class="liquid" id="liquid">
@@ -280,6 +284,7 @@
             <div class="wave wave2"></div>
         </div>
     </div>
+
     <img src="tt.webp" alt="Tank" class="tank-img">
 </div><img src ="..\source\OilTankSimple.jpg" alt = "Oil Tank Image Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Terminal</div>
@@ -291,6 +296,7 @@
                     <div class="wave wave2"></div>
                 </div>
             </div>
+
             <img src="ls.webp" alt="Tank" class="tank-img">
         </div>
         <img src="..\source\OilTankSimple.jpg" alt="Oil Barrel Image">
@@ -304,11 +310,13 @@
                     <div class="wave wave2"></div>
                 </div>
             </div>
+
             <img src="is.webp" alt="Tank" class="tank-img">
         </div>
         <img src="..\source\OilTankSimple.jpg" alt="Oil Barrel Image">
         <span class="percentage-overlay">65%</span>
     </div>
+
     <div class="card-label">Inland Storage</div>
     <div class="card" id="status"><h3>Status</h3><p>Monitoring...</p></div>
     <div class="card" id="local-demand" onclick="openModal('Local Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Local Demand Image"><span class="percentage-overlay">80%</span></div>
@@ -320,7 +328,7 @@
 
 
 <!-- Spinner template -->
-  <div id="spinner1" class="spinner-container">
+  <div id="spinner1" class="spinner-container" >
     <label>Product Rate:</label><br>
     <input type="text" id="text1" readonly>
     <div class="buttons">
