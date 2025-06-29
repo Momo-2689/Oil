@@ -169,102 +169,82 @@
     #label5 { top: 435px; left: 1160px; }
 
     .tank-container {
-      position: relative;
-      width: 300px;
-      height: 500px;
-      margin: 50px auto;
-    }
-
-    /* Background image layer */
-    /*.background-img {
       position: absolute;
-      top: 0;
       left: 0;
+      bottom: 0;
       width: 100%;
       height: 100%;
-      z-index: 1;
-    } */
-
-    /* Tank image layer */
-.tank-container {
-    width: 140px;
-    height: 140px;
-    margin: 50px auto;
-    position: absolute;
-    pointer-events: none;
-}
-
-.tank-img {
-    top: -72px;
-    left: -52px;
-    width: 250px;
-    height: 510px;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-.liquid-container {
-    width: 90px;
-    height: 90%;  /* Changed from 70% */
-    left: 20px;
-    z-index: 3;
-    overflow: hidden;
-}
-
-.liquid {
-    position: absolute;
-    bottom: 0;
-    width: 90px;
-    height: 0;  /* Start with 0 height */
-    left: 20px;
-    background: #0099ff;
-    transition: height 1s ease-in-out;
-    border-radius: 0 0 60px 60px / 0 0 32px 32px;
-    opacity: 0.6;
-    z-index: 3;
-}
-
-.liquid::before {
-    content: "";
-    position: absolute;
-    bottom: 0;  /* Changed from top */
-    left: 0;
-    width: 100%;
-    height: 40px;
-    background: #bab9b9;
-    border-radius: 0 0 300px 300px/ 0 0 128px 128px;
-    z-index: 2;
-    opacity: 1;
-}
-
-.wave {
-    position: absolute;
-    bottom: 0;  /* Changed from top */
-    width: 120px;
-    height: 16px;
-    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 30 0 60 10 T 120 10 V20 H0 Z" fill="%23ffffff"/></svg>') repeat-x;
-    background-size: 48px 100%;
-    animation: waveFlow 4s linear infinite;
-    opacity: 0.3;
-    z-index: 2;
-    border-radius: 0 0 300px 300px/ 0 0 128px 128px;
-}
-
-.wave.wave2 {
-    animation-duration: 6s;
-    opacity: 0.2;
-    bottom: 2px;  /* Changed from top */
-}
-
-@keyframes waveFlow {
-    0% {
-        background-position-x: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
-    100% {
-        background-position-x: -48px;  /* Adjusted for thinner width */
+
+    .tank-img {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 90%;
+      height: auto;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.8;
     }
-}
+
+    .liquid-container {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 100%;
+      z-index: 3;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .liquid {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0;
+      background: #0099ff;
+      transition: height 1s ease-in-out;
+      border-radius: 0 0 60px 60px / 0 0 32px 32px;
+      opacity: 0.6;
+      z-index: 3;
+    }
+
+    .wave {
+      position: absolute;
+      bottom: 0;  /* Changed from top */
+      width: 120px;
+      height: 16px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 10 Q 30 0 60 10 T 120 10 V20 H0 Z" fill="%23ffffff"/></svg>') repeat-x;
+      background-size: 48px 100%;
+      animation: waveFlow 4s linear infinite;
+      opacity: 0.3;
+      z-index: 2;
+      border-radius: 0 0 300px 300px/ 0 0 128px 128px;
+    }
+
+    .wave.wave2 {
+      animation-duration: 6s;
+      opacity: 0.2;
+      bottom: 2px;  /* Changed from top */
+    }
+
+    @keyframes waveFlow {
+      0% {
+          background-position-x: 0;
+      }
+      100% {
+          background-position-x: -48px;  /* Adjusted for thinner width */
+      }
+    }
   </style>
 </head>
 <body>
