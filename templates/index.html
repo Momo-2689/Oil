@@ -362,7 +362,7 @@
     </div>
   </div>
 
-    <!-- Pipes -->
+  <!-- Pipes -->
     <div class="pipe" id="pipe1"></div> 
     <div class="pipe" id="pipe2"></div> 
     <div class="pipe" id="pipe3"></div> 
@@ -371,11 +371,11 @@
     <div class="pipe" id="pipe5"></div> 
 
     <!-- Flow Labels -->
-    <div class="flow-label" id="label1">Flow: 60%</div>
-    <div class="flow-label" id="label2">Flow: 50%</div>
-    <div class="flow-label" id="label3">Flow: 70%</div>
-    <div class="flow-label" id="label4">Flow: 80%</div>
-    <div class="flow-label" id="label5">Flow: 65%</div>
+    <div class="flow-label" id="label1">Flow: <br> 60%</div>
+    <div class="flow-label" id="label2">Flow: <br> 50%</div>
+    <div class="flow-label" id="label3">Flow: <br> 70%</div>
+    <div class="flow-label" id="label4">Flow: <br> 80%</div>
+    <div class="flow-label" id="label5">Flow: <br> 65%</div>
 
   </div>
 
@@ -479,11 +479,11 @@ function updateFlowLabels() {
   const flow4 = ((percent4 / 100) * maxFlowRate).toFixed(1);
   const flow5 = ((percent5 / 100) * maxFlowRate).toFixed(1);
 
-  document.getElementById("label1").textContent = `Flow: ${flow1} kL/h`;
-  document.getElementById("label2").textContent = `Flow: ${flow2} kL/h`;
-  document.getElementById("label3").textContent = `Flow: ${flow3} kL/h`;
-  document.getElementById("label4").textContent = `Flow: ${flow4} kL/h`;
-  document.getElementById("label5").textContent = `Flow: ${flow5} kL/h`;
+  document.getElementById("label1").innerHTML = `Flow: <br> ${flow1} kL/h`;
+  document.getElementById("label2").innerHTML = `Flow: <br> ${flow2} kL/h`;
+  document.getElementById("label3").innerHTML = `Flow: <br> ${flow3} kL/h`;
+  document.getElementById("label4").innerHTML = `Flow: <br> ${flow4} kL/h`;
+  document.getElementById("label5").innerHTML = `Flow: <br> ${flow5} kL/h`;
 }
 
 setInterval(updateFlowLabels, 2000);
