@@ -197,28 +197,28 @@
       padding: 3px 8px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 18px;
+      font-size: 24px;
       white-space: nowrap;
       z-index: 3;
     }
 
     #label1 { top: 570px; left: 680px;  }
     #label2 { top: 300px; left: 1000px; }
-    #label3 { top: 125px; left: 890px; }
+    #label3 { top: 112px; left: 890px;  }
     #label4 { top: 230px; left: 1295px; }
     #label5 { top: 435px; left: 1160px; }
 
-    .tank-container {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
+.tank-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Ensures liquid doesn't overflow */
+  border-radius: 50%; /* Matches card's circular shape */
+  z-index: 3;
+}
+
 
     .tank-img {
       position: absolute;
@@ -233,17 +233,18 @@
     }
 
     .liquid-container {
-      position: absolute;
-      left: 50%;
-      bottom: 15px; /* Move the bottom of the animation up by 15px */
-      transform: translateX(-50%);
-      width: 70%;
-      height: 100%;
-      z-index: 3;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-    }
+  position: absolute;
+  left: 25%;
+  bottom: 17%;
+  width: 55%;
+  height: 57%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 3;
+}
+
 
     .liquid {
       position: absolute;
@@ -646,48 +647,64 @@ setFlowSpeed("pipe5", "label5", 65);
 
 // Create a class to manage individual tank animations
 class TankAnimation {
-  constructor(tankElement, index) {
-    this.tank = tankElement;
-    this.index = index;
+    constructor(tankElement) {
+  this.tank = tankElement;
+  this.percentage = 0;
+  this.isRunning = false;
+
+  this.liquidElement = this.tank.querySelector('.liquid');
+  this.percentOverlay = this.tank.closest('.card').querySelector('.percentage-overlay');
+
+  if (!this.liquidElement) {
+    console.warn(`No liquid element found in tank: ${tankElement.id}`);
+    return;
+  }
+
+  if (!this.percentOverlay) {
+    console.warn(`No percentage overlay found near tank: ${tankElement.id}`);
+  }
+
+
+    }
+
+    // Start the animation loop
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.increaseLiquid();
+    }
+
+    // Stop the animation loop
+    stop() {
+        this.isRunning = false;
+    }
+
+    // Main animation function
+    increaseLiquid() {
+  if (!this.isRunning) return;
+
+  if (this.percentage > 100) {
     this.percentage = 0;
-    this.isRunning = false;
-
-    this.liquidElement = this.tank.querySelector('.liquid');
-    this.percentOverlay = this.tank.closest('.card').querySelector('.percentage-overlay');
   }
 
-  start() {
-    if (this.isRunning) return;
-    this.isRunning = true;
-    this.increaseLiquid();
+  // Update liquid height
+  this.liquidElement.style.height = `${this.percentage}%`;
+
+  // ✅ Update the percentage overlay text
+  if (this.percentOverlay) {
+    this.percentOverlay.textContent = `${this.percentage}%`;
   }
 
-  stop() {
-    this.isRunning = false;
-  }
-
-  increaseLiquid() {
-    if (!this.isRunning) return;
-
-    if (userOverrides[this.index]) return; // Skip animation if user is controlling it
-
-    if (this.percentage > 100) {
-      this.percentage = 0;
-    }
-
-    this.liquidElement.style.height = `${this.percentage}%`;
-
-    if (this.percentOverlay) {
-      this.percentOverlay.textContent = `${this.percentage}%`;
-    }
-
-    this.percentage += 20;
-    setTimeout(() => this.increaseLiquid(), 2000);
-  }
+  // Loop again
+  this.percentage += 20;
+  setTimeout(() => this.increaseLiquid(), 2000);
 }
 
 
+}
+
 // Initialize all tanks when the page loads
+
 
 window.onload = () => {
   for (let i = 0; i < options.length; i++) {
