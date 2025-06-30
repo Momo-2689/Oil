@@ -205,7 +205,7 @@
     #label1 { top: 570px; left: 680px;  }
     #label2 { top: 300px; left: 1000px; }
     #label3 { top: 125px; left: 890px; }
-    #label4 { top: 260px; left: 1295px; }
+    #label4 { top: 230px; left: 1295px; }
     #label5 { top: 435px; left: 1160px; }
 
     .tank-container {
@@ -300,15 +300,15 @@
   left: 975px;
 }
 
-/*Inland Storage*/
+/*Local Storage*/
 #spinner3 {
   
     position: absolute;
-  top: 300px;
+  top: 310px;
   left: 1410px;
 }
 
-/*Local Storage*/
+/*Inland Storage*/
 #spinner4 {
 
   position: absolute;
@@ -470,6 +470,22 @@
   <script>
 
 
+const userOverrides = [false, false, false, false, false, false]; // track spinner use
+
+function scrollUp(i) {
+  indices[i] = (indices[i] - 1 + options[i].length) % options[i].length;
+  userOverrides[i] = true;
+  updateDisplay(i);
+}
+
+function scrollDown(i) {
+  indices[i] = (indices[i] + 1) % options[i].length;
+  userOverrides[i] = true;
+  updateDisplay(i);
+}
+
+
+
 const spinnerCardMap = {
   0: "refinery",
   1: "terminal",
@@ -626,63 +642,65 @@ setFlowSpeed("pipe3", "label3", 70);
 setFlowSpeed("pipe4", "label4", 80); 
 setFlowSpeed("pipe5", "label5", 65);
 
-  const liquid = document.getElementById('liquid');
-let percentage = 20;
+
 
 // Create a class to manage individual tank animations
 class TankAnimation {
-    constructor(tankElement) {
-        this.tank = tankElement;
-        this.percentage = 0;
-        this.isRunning = false;
-        
-        // Find the liquid element within the tank
-        this.liquidElement = this.tank.querySelector('.liquid');
-        if (!this.liquidElement) {
-            console.warn(`No liquid element found in tank: ${tankElement.id}`);
-            return;
-        }
+  constructor(tankElement, index) {
+    this.tank = tankElement;
+    this.index = index;
+    this.percentage = 0;
+    this.isRunning = false;
+
+    this.liquidElement = this.tank.querySelector('.liquid');
+    this.percentOverlay = this.tank.closest('.card').querySelector('.percentage-overlay');
+  }
+
+  start() {
+    if (this.isRunning) return;
+    this.isRunning = true;
+    this.increaseLiquid();
+  }
+
+  stop() {
+    this.isRunning = false;
+  }
+
+  increaseLiquid() {
+    if (!this.isRunning) return;
+
+    if (userOverrides[this.index]) return; // Skip animation if user is controlling it
+
+    if (this.percentage > 100) {
+      this.percentage = 0;
     }
 
-    // Start the animation loop
-    start() {
-        if (this.isRunning) return;
-        this.isRunning = true;
-        this.increaseLiquid();
+    this.liquidElement.style.height = `${this.percentage}%`;
+
+    if (this.percentOverlay) {
+      this.percentOverlay.textContent = `${this.percentage}%`;
     }
 
-    // Stop the animation loop
-    stop() {
-        this.isRunning = false;
-    }
-
-    // Main animation function
-    increaseLiquid() {
-        if (!this.isRunning || this.percentage >= 100) {
-            this.percentage = 0; // Reset for continuous looping
-            return;
-        }
-
-        // Update liquid height
-        this.liquidElement.style.height = `${this.percentage}%`;
-        
-        // Increase percentage and schedule next update
-        this.percentage += 20;
-        setTimeout(() => this.increaseLiquid(), 2000);
-    }
+    this.percentage += 20;
+    setTimeout(() => this.increaseLiquid(), 2000);
+  }
 }
 
+
 // Initialize all tanks when the page loads
+
 window.onload = () => {
-    // Get all tank containers
-    const tanks = document.querySelectorAll('.tank-container');
-    
-    // Create and start animation for each tank
-    tanks.forEach(tank => {
-        const animation = new TankAnimation(tank);
-        animation.start();
-    });
+  for (let i = 0; i < options.length; i++) {
+    updateDisplay(i); // Spinner value
+  }
+
+  const tanks = document.querySelectorAll('.tank-container');
+  tanks.forEach((tank, index) => {
+    const animation = new TankAnimation(tank, index);
+    animation.start();
+  });
 };
+
   </script>
 
 </body>
