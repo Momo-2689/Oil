@@ -124,7 +124,7 @@
 
     .percentage-overlay {
       position: absolute;
-      top: 15px;
+      top: -8px; /* Move overlay to the very top of the card */
       right: 10px;
       padding: 4px 8px;
       background: rgba(0, 0, 0, 0.7);
@@ -347,6 +347,7 @@
 </div><img src ="..\source\OilTankSimple.jpg" alt = "Oil Tank Image Image"><span class="percentage-overlay">75%</span></div>
     <div class="card-label">Terminal</div>
     <div class="card" id="local-storage" onclick="openModal('Local Storage')">
+      <div class="card-label" style="top: 110px; width: 120px;">Local Storage</div>
         <div class="tank-container">
             <div class="liquid-container">
                 <div class="liquid">
@@ -358,7 +359,7 @@
             
         </div>
         <img src="..\source\OilTankSimple.jpg" alt="Oil Barrel Image">
-        <span class="percentage-overlay">75%</span>
+        <span class="percentage-overlay" style="right: -45px;">75%</span>
     </div>
     <div class="card" id="inland-storage" onclick="openModal('Inland Storage')">
         <div class="tank-container">
