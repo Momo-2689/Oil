@@ -85,7 +85,7 @@
 
     .percentage-overlay {
       position: absolute;
-      top: 10px;
+      top: 15px;
       right: 10px;
       padding: 4px 8px;
       background: rgba(0, 0, 0, 0.7);
@@ -100,7 +100,7 @@
       position: absolute;
       width: 160px;
       text-align: center;
-      font-size: 18px;
+      font-size: 24px;
       background: rgba(0, 0, 0, 0.7);
       color: white;
       border-radius: 4px;
@@ -123,11 +123,11 @@
       padding: 20px;
     }
 
-    #refinery + .card-label { top: 470px; left: 420px; }
-    #terminal + .card-label { top: 620px; left: 990px; width: 110px;  }
+    #refinery + .card-label { top: 460px; left: 420px; }
+    #terminal + .card-label { top: 625px; left: 990px; width: 110px;  }
     #local-storage + .card-label { top: 630px; left: 990px;  }
-    #inland-storage + .card-label { top: 35px; left: 1020px; }
-    #local-demand + .card-label { top: 115px; left: 1300px; }
+    #inland-storage + .card-label { top: 4px; left: 1020px; }
+    #local-demand + .card-label { top: 80px; left: 1300px; }
     #inland-demand + .card-label { top: 280px; left: 800px; }
 
     .pipe {
@@ -148,7 +148,7 @@
     #pipe1 { top: 550px; left: 520px; width: 480px; transform: rotate(-5deg); }
     #pipe2 { top: 380px; left: 860px; width: 445px; transform: rotate(275deg); }
     #pipe3 { top: 180px; left: 900px; width: 200px; transform: rotate(160deg); }
-    #pipe4 { top: 270px; left: 1300px; width: 150px; transform: rotate(100deg); }
+    #pipe4 { top: 270px; left: 1300px; width: 150px; transform: rotate(280deg); }
     #pipe5 { top: 475px; left: 1000px; width: 345px; height: 15px; transform: rotate(-35deg); }
 
     .flow-label {
@@ -299,9 +299,9 @@
 
     <div class="card-label">Inland Storage</div>
     <div class="card" id="status"><h3>Status</h3><p>Monitoring...</p></div>
-    <div class="card" id="local-demand" onclick="openModal('Local Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Local Demand Image"><span class="percentage-overlay">80%</span></div>
+    <div class="card" id="local-demand" onclick="openModal('Local Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Local Demand Image"><span class="percentage-overlay"></div>
     <div class="card-label">Local Demand</div>
-    <div class="card" id="inland-demand" onclick="openModal('Inland Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Inland Demand Image"><span class="percentage-overlay">65%</span></div>
+    <div class="card" id="inland-demand" onclick="openModal('Inland Demand')"><img src ="..\source\OtherOilPump.jpg" alt="Inland Demand Image"><span class="percentage-overlay"></div>
     <div class="card-label">Inland Demand</div>
 
 
@@ -385,12 +385,12 @@
 
 
 const options = [
-      ["Shutdown", "Operational"], // Spinner 1
-      ["20%", "40%", "60%", "80%", "100%"],        // Spinner 2
-      ["20%", "40%", "60%", "80%", "100%"],            // Spinner 3
-      ["20%", "40%", "60%", "80%", "100%"],             // Spinner 4
-      ["Low", "Medium", "High"], // Spinner 5
-      ["Low", "Medium", "High"]  // Spinner 6
+      ["Shutdown", "low", "Planned", "High"], // Spinner 1
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],        // Spinner 2
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],            // Spinner 3
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],             // Spinner 4
+      ["Low", "Planned", "High"], // Spinner 5
+      ["Low", "Planned", "High"]  // Spinner 6
     ];
 
     const indices = [0, 0, 0, 0, 0, 0];
@@ -416,12 +416,6 @@ const options = [
       }
     };
 
-//    const options = {
-//      "Refinery": ["Shutdown", "Operational"],
-//      "Terminal": ["0 tanks out", "1 tanks out","2 tanks out", "3 tanks out", "4 tanks out"],
-//      "Local Storage": ["None", "Full"],
-//      "Inland Storage": ["0 tanks out", "1 tanks out","2 tanks out", "3 tanks out"]
-//    };
 
     const cardGlowMap = {
       "Refinery": ["glow-red", "glow-green"],
