@@ -33,7 +33,46 @@
       font-weight: revert;
     }
 
-    
+    .spinner-container {
+  display: inline-block;
+  position: relative;
+  margin: 10px;
+}
+
+.spinner-container input[type="text"] {
+  width: 120px;
+  padding-right: 30px; /* Space for arrows */
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #888;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.spinner-container .buttons {
+  position: absolute;
+  right: 5px;
+  top: 6px;
+  display: none;
+  flex-direction: column;
+}
+
+.spinner-container:hover .buttons {
+  display: flex;
+}
+
+.spinner-container .buttons button {
+  padding: 0;
+  width: 20px;
+  height: 14px;
+  font-size: 10px;
+  line-height: 10px;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  margin: 1px 0;
+  border-radius: 2px;
+}
 
     .container {
       position: relative;
@@ -245,6 +284,43 @@
           background-position-x: -48px;  /* Adjusted for thinner width */
       }
     }
+
+    #spinner1 {
+  position: absolute;
+  top: 625px;
+  left: 450px;
+}
+
+#spinner2 {
+  position: absolute;
+  top: 300px;
+  left: 50px;
+}
+
+#spinner3 {
+  position: absolute;
+  top: 400px;
+  left: 50px;
+}
+
+#spinner4 {
+  position: absolute;
+  top: 500px;
+  left: 50px;
+}
+
+#spinner5 {
+  position: absolute;
+  top: 600px;
+  left: 50px;
+}
+
+#spinner6 {
+  position: absolute;
+  top: 700px;
+  left: 50px;
+}
+
   </style>
 </head>
 <body>
@@ -386,11 +462,11 @@
 
 const options = [
       ["Shutdown", "low", "Planned", "High"], // Spinner 1
-      ["100%", "80%", "60%", "40%", "20% ", "0%"],        // Spinner 2
-      ["100%", "80%", "60%", "40%", "20% ", "0%"],            // Spinner 3
-      ["100%", "80%", "60%", "40%", "20% ", "0%"],             // Spinner 4
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],// Spinner 2
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],// Spinner 3
+      ["100%", "80%", "60%", "40%", "20% ", "0%"],// Spinner 4
       ["Low", "Planned", "High"], // Spinner 5
-      ["Low", "Planned", "High"]  // Spinner 6
+      ["Low", "Planned", "High"],  // Spinner 6
     ];
 
     const indices = [0, 0, 0, 0, 0, 0];
