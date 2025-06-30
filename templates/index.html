@@ -462,6 +462,16 @@
   <script>
 
 
+const spinnerCardMap = {
+  0: "refinery",
+  1: "terminal",
+  2: "local-storage",
+  3: "inland-storage",
+  4: "local-demand",
+  5: "inland-demand"
+};
+
+
 const options = [
       ["Shutdown", "low", "Planned", "High"], // Spinner 1
       ["100%", "80%", "60%", "40%", "20% ", "0%"],// Spinner 2
@@ -474,8 +484,30 @@ const options = [
     const indices = [0, 0, 0, 0, 0, 0];
 
     function updateDisplay(i) {
-      document.getElementById('text' + (i + 1)).value = options[i][indices[i]];
-    }
+  const value = options[i][indices[i]];
+  const textInput = document.getElementById('text' + (i + 1));
+  textInput.value = value;
+
+  const cardId = spinnerCardMap[i];
+  const card = document.getElementById(cardId);
+
+  if (!card) return;
+
+  // Remove all possible glow classes
+  card.classList.remove("glow-red", "glow-green", "glow-blue", "glow-yellow");
+
+  // Apply glow based on value
+  if (value.includes("High") || value.includes("100%") || value.includes("Planned") || value.includes("Operational")) {
+    card.classList.add("glow-green");
+  } else if (value.includes("80%")) {
+    card.classList.add("glow-blue");
+  } else if (value.includes("60%") || value.includes("Medium")) {
+    card.classList.add("glow-yellow");
+  } else {
+    card.classList.add("glow-red");
+  }
+}
+
 
     function scrollUp(i) {
       indices[i] = (indices[i] - 1 + options[i].length) % options[i].length;
