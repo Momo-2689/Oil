@@ -577,7 +577,7 @@ function setFlowSpeed(pipeId, labelId, percent) {
   const flowRate = ((percent / 100) * maxFlowRate).toFixed(1); // round to 1 decimal
 
   // Update label with kL/h instead of percentage
-  label.innerText = `Flow: ${flowRate} kL/h`;
+  label.innerText = `Flow: \n ${flowRate} kL/h`;
 }
 
 // Set initial flow speeds
